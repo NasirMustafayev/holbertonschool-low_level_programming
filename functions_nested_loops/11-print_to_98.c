@@ -10,7 +10,7 @@ void print_to_98(int n)
 
 	if (n < 98)
 	{
-		for (c = 0; c <= 98; c++)
+		for (c = n; c <= 98; c++)
 		{
 			(c == 98) ? printf("%i", c) : printf("%i, ", c);
 		}
