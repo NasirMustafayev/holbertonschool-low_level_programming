@@ -1,17 +1,20 @@
 #include "main.h"
 /**
- * print_square - Prints # to console n of times
- *@size: input number
+ * print_square - create a square with # in console 
+ *@size: number of times the '#' character should be printed
  *
  * Return: void
  */
 void print_square(int size)
 {
-	int c;
+	int r, c;
 
-	for (c = 0; c < size; c++)
+	for (r = 0; r < size; r++)
 	{
-		_putchar('#');
+		for (c = 0; c < size; c++)
+		{
+			_putchar('#');
+		}
+		_putchar('\n');
 	}
-	_putchar('\n');
 }

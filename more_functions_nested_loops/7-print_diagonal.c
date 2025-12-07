@@ -1,17 +1,25 @@
 #include "main.h"
 /**
- * print_diagonal - Prints \(reverseslash) to console n of times
- *@n: input number
+ * print_diagonal - draws a diagonal line on the terminal
+ * @n: number of times the '\' character should be printed
  *
  * Return: void
  */
 void print_diagonal(int n)
 {
-	int c;
+	int row, space;
 
-	for (c = 0; c < n; c++)
+	if (n <= 0)
 	{
-		_putchar('\\');
+		_putchar('\n');
+		return;
 	}
-	_putchar('\n');
+	for (row = 0; row < n; row++)
+	{
+		for (space = 0; space < row; space++)
+			_putchar(' ');
+
+		_putchar('\\');
+		_putchar('\n');
+	}
 }
