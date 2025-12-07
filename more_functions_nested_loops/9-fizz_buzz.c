@@ -1,0 +1,28 @@
+#include <stdio.h>
+/**
+ * main - FizzBuzz prints 0-100
+ * Replaces muliples of 3 with "Fuzz" and 5 "Buzz"
+ * And the number that multiple of both 3 and 5 with "FizzBuzz"
+ *
+ * Return: 0
+ */
+int main(void)
+{
+	int c;
+
+	for (c = 1; c <= 100; c++)
+	{
+		if (c % 3 == 0 && c % 5 == 0)
+			printf("FizzBuzz");
+		else if (c % 3 == 0)
+			printf("Fizz");
+		else if (c % 5 == 0)
+			printf("Buzz");
+		else
+			printf("%i", c);
+		if (c < 100)
+			printf(" ");
+	}
+
+	return (0);
+}
