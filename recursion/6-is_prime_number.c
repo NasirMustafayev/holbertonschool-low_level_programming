@@ -14,7 +14,8 @@ int is_prime_helper(int n, int d)
 	return (is_prime_helper(n, d + 1));
 }
 /**
- * is_prime_number - function that returns 1 if the input integer is a prime number, otherwise return 0
+ * is_prime_number - function that returns 1 if the input integer
+ * is a prime number, otherwise return 0
  * @n: number to check
  * Return: 1 if n is prime, 0 otherwise
  */
