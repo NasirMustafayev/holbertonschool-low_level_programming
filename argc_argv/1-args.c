@@ -1,6 +1,6 @@
 #include "stdio.h"
 /**
- * main - prints the name of the program
+ * main - prints the number of arguments passed to it
  * @argc: number of arguments
  * @argv: array of arguments
  *
@@ -10,8 +10,10 @@
 int main(int argc, char *argv[])
 {
 	//prevent unused variable warning
-	(void)argc;
+	 (void)argv;
+	 // Subtracting 1 to not count the program name
+	 int actualargc = argc - 1;
 
-	printf("%s\n", argv[0]);
-	return (0);
+	 printf("%d\n", actualargc);
+	 return (0);
 }
