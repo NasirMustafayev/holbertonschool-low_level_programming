@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-	//prevent unused variable warning
+	/* prevent unused variable warning */
 	(void)argc;
 
 	printf("%s\n", argv[0]);

@@ -9,11 +9,11 @@
 
 int main(int argc, char *argv[])
 {
-	//prevent unused variable warning
-	 (void)argv;
-	 // Subtracting 1 to not count the program name
-	 int actualargc = argc - 1;
+	/* prevent unused variable warning */
+	(void)argv;
+	/* Subtracting 1 to not count the program name */
+	int actualargc = argc - 1;
 
-	 printf("%d\n", actualargc);
-	 return (0);
+	printf("%d\n", actualargc);
+	return (0);
 }
