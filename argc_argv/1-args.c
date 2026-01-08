@@ -11,9 +11,8 @@ int main(int argc, char *argv[])
 {
 	/* prevent unused variable warning */
 	(void)argv;
-	/* Subtracting 1 to not count the program name */
-	int actualargc = argc - 1;
 
-	printf("%d\n", actualargc);
+	/* Subtracting 1 to not count the program name */
+	printf("%d\n", argc - 1);
 	return (0);
 }
