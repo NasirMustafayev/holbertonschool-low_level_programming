@@ -1,42 +1,113 @@
 #include "main.h"
 #include <stdlib.h>
+
 /**
- * argstostr - concatenates all the arguments of your program
- * @ac: argument count
- * @av: argument vector
+ * count_words - counts words in a string
+ * @str: input string
  *
- * Return: pointer to new string, or NULL if ac == 0, av == NULL,
- * or malloc fails
+ * Return: number of words
  */
-char *argstostr(int ac, char **av)
+static int count_words(char *str)
 {
-	int i, j;
-	unsigned int total = 0, k = 0;
-	char *s;
+	int i = 0, in_word = 0, count = 0;
 
-	if (ac == 0 || av == NULL)
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+			in_word = 0;
+		else if (in_word == 0)
+		{
+			in_word = 1;
+			count++;
+		}
+		i++;
+	}
+	return (count);
+}
+
+/**
+ * make_word - allocates and copies one word
+ * @str: input string
+ * @i: pointer to index (advanced past the word)
+ *
+ * Return: allocated word or NULL
+ */
+static char *make_word(char *str, int *i)
+{
+	int start, len = 0, j;
+	char *w;
+
+	while (str[*i] == ' ' || str[*i] == '\t' || str[*i] == '\n')
+		(*i)++;
+
+	start = *i;
+	while (str[*i] != '\0' &&
+	       str[*i] != ' ' &&
+	       str[*i] != '\t' &&
+	       str[*i] != '\n')
+	{
+		(*i)++;
+		len++;
+	}
+
+	w = (char *)malloc((len + 1) * sizeof(char));
+	if (w == NULL)
 		return (NULL);
 
-	for (i = 0; i < ac; i++)
+	for (j = 0; j < len; j++)
+		w[j] = str[start + j];
+	w[len] = '\0';
+
+	return (w);
+}
+
+/**
+ * free_all - frees a partially allocated words array
+ * @words: array of words
+ * @n: number of allocated words
+ */
+static void free_all(char **words, int n)
+{
+	int i;
+
+	for (i = 0; i < n; i++)
+		free(words[i]);
+	free(words);
+}
+
+/**
+ * strtow - splits a string into words
+ * @str: input string
+ *
+ * Return: array of words or NULL
+ */
+char **strtow(char *str)
+{
+	char **words;
+	int wc, i = 0, w = 0;
+
+	if (str == NULL || str[0] == '\0')
+		return (NULL);
+
+	wc = count_words(str);
+	if (wc == 0)
+		return (NULL);
+
+	words = (char **)malloc((wc + 1) * sizeof(char *));
+	if (words == NULL)
+		return (NULL);
+
+	while (w < wc)
 	{
-		if (av[i] == NULL)
+		words[w] = make_word(str, &i);
+		if (words[w] == NULL)
+		{
+			free_all(words, w);
 			return (NULL);
-		for (j = 0; av[i][j] != '\0'; j++)
-			total++;
-		total++; /* for '\n' */
+		}
+		w++;
 	}
+	words[w] = NULL;
 
-	s = (char *)malloc((total + 1) * sizeof(char));
-	if (s == NULL)
-		return (NULL);
-
-	for (i = 0; i < ac; i++)
-	{
-		for (j = 0; av[i][j] != '\0'; j++)
-			s[k++] = av[i][j];
-		s[k++] = '\n';
-	}
-	s[k] = '\0';
-
-	return (s);
+	return (words);
 }
