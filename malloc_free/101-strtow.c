@@ -26,11 +26,11 @@ static int count_words(char *str)
 }
 
 /**
- * make_word - allocates and copies one word starting at index *i
+ * make_word - allocates and copies one word
  * @str: input string
- * @i: pointer to current index (will be advanced past the word)
+ * @i: pointer to index (advanced past the word)
  *
- * Return: allocated word, or NULL on failure
+ * Return: allocated word or NULL
  */
 static char *make_word(char *str, int *i)
 {
@@ -41,7 +41,10 @@ static char *make_word(char *str, int *i)
 		(*i)++;
 
 	start = *i;
-	while (str[*i] != '\0' && str[*i] != ' ' && str[*i] != '\t' && str[*i] != '\n')
+	while (str[*i] != '\0' &&
+	       str[*i] != ' ' &&
+	       str[*i] != '\t' &&
+	       str[*i] != '\n')
 	{
 		(*i)++;
 		len++;
@@ -59,7 +62,7 @@ static char *make_word(char *str, int *i)
 }
 
 /**
- * free_all - frees an array of words partially filled
+ * free_all - frees a partially allocated words array
  * @words: array of words
  * @n: number of allocated words
  */
@@ -76,7 +79,7 @@ static void free_all(char **words, int n)
  * strtow - splits a string into words
  * @str: input string
  *
- * Return: pointer to array of words (NULL-terminated), or NULL
+ * Return: array of words or NULL
  */
 char **strtow(char *str)
 {
