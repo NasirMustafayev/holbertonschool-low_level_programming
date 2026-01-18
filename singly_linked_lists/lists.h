@@ -2,7 +2,6 @@
 #define LISTS_H
 #include <stddef.h>
 #include <string.h>
-
 /**
  * struct s_list - singly linked list
  * @str: string - (malloc'ed string)
