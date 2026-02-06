@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <stdlib.h>
 #include "main.h"
 /**
  * read_textfile - reads a text file and prints it to the POSIX standard output
@@ -13,27 +12,23 @@
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int fileDescriptor;
-	char *buffer;
-	ssize_t bytesRead;
-	ssize_t bytesWritten;
-
 	if (filename == NULL)
 		return (0);
 
-	fileDescriptor = open(filename, O_RDONLY);
+	int fileDescriptor = open(filename, O_RDONLY);
+
 	if (fileDescriptor == -1)
 		return (0);
 
-	buffer = malloc(letters);
+	char buffer[letters];
+/*char *buffer = malloc(letters); dynamically allocate memory for the buffer*/
+	ssize_t bytesRead = read(fileDescriptor, buffer, letters);
 
-	bytesRead = read(fileDescriptor, buffer, letters);
 	if (bytesRead == -1)
 		return (0);
 
-	bytesWritten = write(STDOUT_FILENO, buffer, bytesRead);
+	ssize_t bytesWritten = write(STDOUT_FILENO, buffer, bytesRead);
 
-	free(buffer);
 	close(fileDescriptor);
 
 	if (bytesWritten != bytesRead)
