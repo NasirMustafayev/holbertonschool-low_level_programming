@@ -34,8 +34,10 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	/* Open the destination file for writing, */
-	/* create it if it doesn't exist, and truncate it if it does */
+	/*
+	* Open the destination file for writing,
+	* create it if it doesn't exist, and truncate it if it does
+	*/
 	destinationFD = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
 	/* Check if the destination file was opened successfully */
@@ -46,15 +48,19 @@ int main(int argc, char *argv[])
 		exit(99);
 	}
 
-	/* Read from the source file */
-	/* and write to the destination file in chunks of 1024 bytes */
+	/*
+	* Read from the source file
+	* and write to the destination file in chunks of 1024 bytes
+	*/
 	while ((bytesRead = read(sourceFD, buffer, 1024)) > 0)
 	{
 		/* Write the read bytes to the destination file */
 		bytesWritten = write(destinationFD, buffer, bytesRead);
 
-		/* Check if the write operation was successful */
-		/* and if the number of bytes written matches the number of bytes read */
+		/*
+		* Check if the write operation was successful
+		* and if the number of bytes written matches the number of bytes read
+		*/
 		if (bytesWritten == -1 || bytesWritten != bytesRead)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
@@ -73,7 +79,7 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	/*Closing files and checking them if they closes properly*/
+	/* Closing files and checking them if they closes properly*/
 	if (close(sourceFD) == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", sourceFD);
